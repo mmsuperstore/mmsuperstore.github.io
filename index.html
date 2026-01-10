@@ -1,14 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Basic -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maddur Murugan Super Store </title>
+    <title>Maddur Murugan Super Store - Admin Enhanced</title>
 
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- ================= SECURITY HEADERS ================= -->
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy"
+          content="
+            default-src 'self';
+            script-src 'self' https://unpkg.com https://cdn.tailwindcss.com;
+            style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com;
+            img-src 'self' data:;
+            font-src 'self';
+            connect-src 'self';
+            frame-ancestors 'none';
+            base-uri 'self';
+            form-action 'self';
+          ">
+
+    <!-- Clickjacking Protection -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+
+    <!-- MIME Sniffing Protection -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+
+    <!-- Referrer Policy -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- ================= SECURE CDN LOADING ================= -->
+
+    <!-- React (Development build – OK for now, switch to prod later) -->
+    <script
+        src="https://unpkg.com/react@18/umd/react.development.js"
+        crossorigin="anonymous">
+    </script>
+
+    <script
+        src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+        crossorigin="anonymous">
+    </script>
+
+    <!-- Tailwind via CDN -->
+    <script
+        src="https://cdn.tailwindcss.com"
+        crossorigin="anonymous">
+    </script>
     <script>
         // Tailwind Configuration for a More Colorful Interface
         tailwind.config = {
@@ -147,7 +187,7 @@
         // UPI Configuration - Update these with your actual UPI details
         const UPI_CONFIG = {
             upiId: 'murunmurugan80-2@okicici', // Replace with your actual UPI ID
-            merchantName: 'Murugan Super Store',
+            merchantName: 'Maddur Murugan Super Store',
             qrCodeBase: 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=',
             paymentApps: [
                 { id: 'gpay', name: 'Google Pay', icon: 'fa-brands fa-google-pay', color: 'bg-white text-gray-800', deepLink: 'tez://upi/pay' },
@@ -159,12 +199,12 @@
 
         // Email Notification Configuration
         const EMAIL_CONFIG = {
-            storeName: 'Murugan Super Store',
+            storeName: 'Maddur Murugan Super Store',
             storeEmail: 'noreply@muruganstore.com', // Update with your store email
             adminEmail: 'admin@muruganstore.com', // Update with admin email
             storePhone: '+91 7530089730',
             storeAddress: '123 Main Street, Chennai, Tamil Nadu 600001',
-            storeWebsite: 'https://muruganstore.com'
+            storeWebsite: 'https://mmsuperstore.github.io/'
         };
 
         // =======================================================
@@ -730,7 +770,7 @@
 
             // 1. STORE INFORMATION (Change these values)
             const STORE_CONFIG = {
-                name: "Murugan Super Store",
+                name: "Maddur Murugan Super Store",
                 tagline: "Serving you fresh since 2003",
                 phone: "+91 7530089730",
                 address: "1/309 Bazzer Street, Maddur, Tamil Nadu 631206",
@@ -918,7 +958,7 @@
                     {/* 1. WHATSAPP FLOATING BUTTON */}
                     {/* =========================================== */}
                     <a
-                        href={`https://chat.whatsapp.com/FSSfwe6Rd5CDxlmgVffeEI`}
+                        href={`https://wa.me/${STORE_CONFIG.whatsappNumber}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform animate-bounce-slow"
@@ -1134,7 +1174,7 @@
                     {/* =========================================== */}
                     <div className="space-y-8">
                         <div className="flex flex-col items-center gap-2">
-                            <h2 className="text-2xl md:text-3xl font-black text-primary-dark uppercase">Featured Products</h2>
+                            <h2 className="text-2xl md:text-3xl font-black text-primary-dark uppercase">Our Products</h2>
                             <div className="w-24 h-1.5 bg-accent rounded-full"></div>
                             <p className="text-gray-600 text-center">Handpicked fresh items just for you</p>
                         </div>
@@ -1318,7 +1358,7 @@
                                     <i className="fa-brands fa-twitter"></i>
                                 </a>
                                 <a
-                                    href={`https://chat.whatsapp.com/FSSfwe6Rd5CDxlmgVffeEI`}
+                                    href={`https://wa.me/${STORE_CONFIG.whatsappNumber}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-white hover:text-green-400 transition"
@@ -1845,7 +1885,7 @@
 
                                 <div className="space-y-4">
                                     <div>
-                                        <label className="block text-sm font-semibold mb-2">Transaction ID (UTR)</label>
+                                        <label className="block text-sm font-semibold mb-2">Transaction ID (UTR) With Name</label>
                                         <input
                                             type="text"
                                             placeholder="Enter transaction ID from your app"
@@ -1853,7 +1893,7 @@
                                             value={transactionId}
                                             onChange={(e) => setTransactionId(e.target.value)}
                                         />
-                                        <p className="text-xs text-gray-500 mt-1">Find this in your payment app after transaction</p>
+                                        <p className="text-xs text-gray-500 mt-1">Find this in your payment app after transaction with 12 Number</p>
                                     </div>
 
                                     <button
@@ -1870,12 +1910,9 @@
                                     </button>
 
                                     <div className="text-center">
-                                        <button
-                                            onClick={handleManualVerification}
-                                            className="text-sm text-gray-600 hover:text-gray-800"
-                                        >
-                                            Manual Verification
-                                        </button>
+
+                                          Example : 600645274493--murugan
+
                                     </div>
                                 </div>
                             </div>
@@ -3233,7 +3270,7 @@
 
             return (
                 <div className="p-4 max-w-3xl mx-auto">
-                    <h1 className="text-3xl font-bold mb-6 text-primary-dark border-b-2 border-primary/50 pb-2"><i className="fa-solid fa-headset mr-2"></i> Customer Support</h1>
+                    <h1 className="text-3xl font-bold mb-6 text-primary-dark border-b-2 border-primary/50 pb-2"><i className="fa-solid fa-headset mr-2"></i> Customer Support Chat (or) Call to 9047878046</h1>
 
                     {/* Delivery Policy Notice */}
                     <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-200 rounded-lg p-4 mb-6">
@@ -3421,8 +3458,8 @@
                     <ToastNotification message={toast.message} type={toast.type} onClose={() => setToast({ message: '', type: '' })} />
 
                     <footer className="bg-primary-dark text-white text-center py-6 mt-8 flex-shrink-0 shadow-inner">
-                        <div className="mb-2 font-bold text-lg tracking-wider text-accent">MURUGAN SUPER STORE</div>
-                        <div className="text-xs text-gray-400">Powered by Google Apps Script | © 2024. All rights reserved.</div>
+                        <div className="mb-2 font-bold text-lg tracking-wider text-accent">MADDUR MURUGAN SUPER STORE</div>
+                        <div className="text-xs text-gray-400">Powered by samcm | © 2026. All rights reserved.</div>
                         <div className="text-xs text-gray-400 mt-2">
                             UPI ID: {UPI_CONFIG.upiId} | Accepts all UPI payments
                         </div>
